@@ -1,13 +1,14 @@
 import { Fab } from "@mui/material";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import AddIcon from "@mui/icons-material/Add";
 
 import { useState, MouseEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AddTab() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
   const open = Boolean(anchorEl);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -41,9 +42,14 @@ export default function AddTab() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem
+          onClick={() => {
+            navigate("/note");
+            handleClose();
+          }}
+        >
+          Note
+        </MenuItem>
       </Menu>
     </div>
   );
